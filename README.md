@@ -3,7 +3,7 @@
   
 A Symphony project  
 
-![alt text]( "main page")  
+![alt text](https://github.com/Crinav/my_quizz/blob/master/MyQuizz.png "main page")  
 ___  
   
 
@@ -25,7 +25,12 @@ Copyright (©) Christophe Navarro <navarro.christophe@gmail.com>
   
 
 
-![alt text]()   
+![alt text](https://github.com/Crinav/my_quizz/blob/master/Question.png)   
 ___  
 
-![alt text]()  
+![alt text](https://github.com/Crinav/my_quizz/blob/master/Userindex.png)  
+___
+
+![alt text](https://github.com/Crinav/my_quizz/blob/master/MyQuizz(1).png)  
+
+___
