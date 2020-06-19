@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reponse index{% endblock %}
+
+{% block body %}
+{% if score is not defined %}
+    {% set score = 0 %}
+{% endif %}
+
+
+    
+    {# <a href="{{ path('reponse_new') }}">Create new</a> #}
+
+
+    <div class="container-fluid text-center">
+        {% set break = false %}
+        {% for reponse in reponses %}
+        {% if not break %}
+            <h1>Quizz : <div class="alert alert-dark">{{ reponse[0].question.categorie.name }}</div></h1>
+            <img src="{{ reponse[0].question.categorie.img }}" alt={{ reponse[0].question.categorie.name }}"" width="400px">
+        {% endif %}
+        
+            {% set break = true %}
+        {% endfor %} 
+    </div> 
+    <div class="row">
+    {% for reponse in reponses %}  
+    {% set break = false %}
+    
+        <div class="col-3 mt-5" style="border: 1px solid lightgrey" >
+
+        {% for rep in reponse %}
+    
+         {% if not break %}
+            <b>{{rep.question.question}}</b>  <hr>
+            {% endif %}
+            {% set break = true %} 
+                {% if  rep.id_question == rep.question.id  %}
+                    {% if rep.reponse_expected == true %}
+                        <div class="alert alert-success">{{ rep.reponse }}
+                            {% if rep.id == tabId_reponses[rep.id_question] %}
+                                &#9989;<br>
+                                   {% set score = score + 1 %}
+                            {% endif %}
+                            </div>
+                    {% else %}
+                        <div class="alert alert-danger">{{ rep.reponse }}
+                        {% if rep.id == tabId_reponses[rep.id_question] %}
+                                    &#10060;<br>
+                        {% endif %}
+                        </div>   
+                    {% endif %}
+                {% endif %}    
+         
+        {% endfor %}
+        </div> 
+        
+        
+    {% endfor %} 
+    </div>
+     </div>
+</div>
+
+<div class="text-center">
+<div class="score alert alert-warning  mt-2 mb-2">Votre score : {{ score }}/{{tabId_questions|keys|last + 1}}</div>
+<a href="{{path('categorie_index')}}"><button type="submit" class="btn btn-success w-25 mt-5 mb-5" >Revenir aux Quizz</button></a>
+</div>
+{# <div class="pagination">
+{{ knp_pagination_render(reponses) }}
+</div> #}
+    {# <a href="{{ path('reponse_new') }}">Create new</a> #}
+{% if is_granted('ROLE_ADMIN') %}
+    <div class="container">
+    <h1>Reponses</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Reponse</th>
+                <th>Vrai/Faux</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rep in reponses %}
+        {% for reponse in rep %}
+            
+        
+            <tr>
+                <td>{{ reponse.id }}</td>
+                <td>{{ reponse.reponse }}</td>
+                <td>{{reponse.reponse_expected}}</td>
+                <td>
+                    <a href="{{ path('reponse_show', {'id': reponse.id}) }}">show</a>
+                    <a href="{{ path('reponse_edit', {'id': reponse.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+            {% endfor %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="text-center"><button class="btn btn-warning mt-3 mb-3 w-25"><a href="{{ path('reponse_new') }}">Rajouter une reponse</a></button></div>
+{% endif %}
+</div>
+{% endblock %}
+
+
+

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer une Reponse{% endblock %}
+
+{% block body %}
+    <div class="container ">
+    <h1 class="text-center mb-3">>Editer une Reponse</h1>
+
+    {{ include('reponse/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+
+   
+
+    {{ include('reponse/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

@@ -1,0 +1,6 @@
+
+{{ form_start(form, {'action': path('reponse_new')}) }}
+    <input type="hidden" name="nb" value="{{ nb }}"
+    {{ form_widget(form) }}
+    <div class="text-center"><button class="btn btn-primary w-25">{{ button_label|default('Suite') }}</button></div>
+{{ form_end(form) }}

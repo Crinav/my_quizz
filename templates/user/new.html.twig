@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Membre{% endblock %}
+
+{% block body %}
+<div class="container ">
+    <h1 class="text-center mb-3">S'enregistrer</h1>
+        {{ include('user/_form.html.twig', {'action': path('user_new', {'id': user})}) }}
+        
+    <div><a href="{{ path('admin_user_index') }}">Revenir aux Membres</a></div>
+</div>
+    
+{% endblock %}

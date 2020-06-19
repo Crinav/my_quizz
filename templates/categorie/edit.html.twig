@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer un Quizz{% endblock %}
+
+{% block body %}
+    <div class="container ">
+    <h1 class="text-center mb-3">Edit Categorie</h1>
+
+    {{ include('categorie/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+
+    <a href="{{ path('categorie_index') }}">Revenir aux Quizz</a>
+
+    {{ include('categorie/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

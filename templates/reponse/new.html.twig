@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle reponse{% endblock %}
+
+{% block body %}
+
+<div class="container ">
+    <h1 class="text-center mb-3">Ajouter une reponse {{app.session.get('nb')}}/3</h1>
+        {{ include('reponse/_form.html.twig') }}
+        
+    <div><a href="{{ path('categorie_index') }}">Revenir aux Quizz</a></div>
+</div>
+{% endblock %}

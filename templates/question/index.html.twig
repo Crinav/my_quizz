@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Question{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+    {% set break = false %}
+    {% for question in questions %}
+     {% if not break %}
+        <h1 class="text-center">Quizz : <div class="alert alert-dark">{{question.categorie.name}}</div></h1>
+        <div class="text-center "><img class="img-thumbnail" src="{{ question.categorie.img }}" alt="{{question.categorie.name}}" width="400px"></div>
+    {% endif %}
+       
+        {% set break = true %}
+    {% endfor %} 
+     
+    
+    <form action="{{path('reponse_index')}}" method="GET">
+        <div class="row">
+            {% for question in questions %}
+            <input type="hidden" name="id_question[]" value="{{question.id}}" >
+            <div class="col-3 mt-5" style="border: 1px solid lightgrey" >
+                <b>{{question.question}}</b><hr>
+                {% for reponse in question.reponses %}
+                    {% if  reponse.id_question == question.id  %}                        
+                        <fieldset name="{{ question.id }}"> 
+                            
+                            <input type="radio" name="{{question.id}}" value="{{reponse.id}}" >
+                            <label for="{{question.id}}"><span>{{ reponse.reponse }}</span></label><br>
+                        </fieldset>
+                    {% endif %}  
+                {% endfor %} 
+            </div> 
+            {% endfor %} 
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-success w-50 mt-5 mb-5" >Envoyer</button>
+        </div>
+    </form>
+</div>
+{# <div class="pagination">
+{{ knp_pagination_render(questions) }}
+</div> #}
+    
+
+    {% if is_granted('ROLE_ADMIN') %}
+    <h1>Questions</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Question</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for question in questions %}
+            <tr>
+                <td>{{ question.id }}</td>
+                <td>{{ question.question }}</td>
+                
+                <td>
+                    <a href="{{ path('question_show', {'id': question.id}) }}">show</a>
+                    <a href="{{ path('question_edit', {'id': question.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="text-center"><button class="btn btn-warning mt-3 mb-3 w-25"><a href="{{ path('question_new') }}">Rajouter une question</a></button></div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="text-center mb-6">Tous les membres</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Password</th>
+                <th>Username</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.username }}</td>
+                <td>
+                    <div class="btn-group"><a href="{{ path('admin_user_show', {'id': user.id}) }}"><button class="btn btn-primary mr-3">Voir</button></a>
+                    <a href="{{ path('admin_user_edit', {'id': user.id}) }}"><button class="btn btn-primary">Editer</button></a></div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Pas de données</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_user_new') }}">Créer un nouveau membre</a>
+    </div>
+{% endblock %}

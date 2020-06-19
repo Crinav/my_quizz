@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Quizz{% endblock %}
+
+{% block body %}
+<div class="container">
+<h1 class="text-center">My Quizz</h1>
+    <div class='row'>
+        {% for categorie in categories %}
+            <div class="card col-lg-3 m-2" style="max-width: 20rem;">
+                <a href="{{ path('question_index', {id: categorie.id}) }}">
+                <img class="card-img-top" src={{categorie.img}}  alt="{{categorie.name}}" style="width: 100%; height: 10vw; object-fit: cover;">
+                <div class="card-body">
+                    <h4 class="card-title text-center">{{categorie.name}}</h4>
+                    </a> 
+                    <span class="score text-center">
+                     {% if app.user %}
+                        {% if scores is defined %}
+                        {% for score in scores %}
+                        {% if score.id_categorie == categorie.id %}
+                             <div>Votre score : <b>{{score.score}}</b></div>
+                           <div><small> Obtenu le : {{score.date | date('d/m/Y') }}</small></div>
+                        {% endif %}
+                           
+                        {% endfor %}
+                            
+                        {% else %}
+                            <p><small>Vous n'avez pas encore répondu à ce Quizz</small></p>
+                        {% endif %}
+                    {% elseif app.session.get('score' ~ categorie.id) %}
+                  
+                        <div class="alert alert-info">
+                        Votre score : <b>{{app.session.get('score' ~ categorie.id)}}</b>
+                        </div>   
+                    {% endif %}
+                    </span>
+                </div>
+                {% if is_granted('ROLE_ADMIN') %}
+            <button class="btn btn-warning mb-3"><a href="{{ path('categorie_edit', {'id': categorie.id}) }}">Editer</a></button>
+        {% endif %}
+            </div>  
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
