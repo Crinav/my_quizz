@@ -5,10 +5,6 @@ A Symphony project
 
 ![alt text](https://github.com/Crinav/my_quizz/blob/master/MyQuizz.png "main page")  
 ___  
-  
-
-## How to use  
-
  
   
 ### Usage  
@@ -20,6 +16,8 @@ symfony server:start
 Copyright (©) Christophe Navarro <navarro.christophe@gmail.com>
 
 [linkedin](https://www.linkedin.com/in/christophe-navarro-b5173a171) 
+
+[Portfolio](https://portfolio-chris.herokuapp.com/) 
   
 ## Screenshots
   
